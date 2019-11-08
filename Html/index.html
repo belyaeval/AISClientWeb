@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Страница1</title>
+</head>
+<body>
+<h1>Страница 1</h1>
+<hr/>
+<form action="/action.php" method="post">
+    <h2>
+        <label for="myText">Текст</label>
+    </h2>
+    <input type="text" placeholder="Введите текст" id="myText" name="myText"/>
+    <button type="submit">Отправить</button>
+    <hr/>
+    <label>Радиобаттон
+        <input type="radio" value="1" name="myRadioButton">1
+    </label>
+    <label>
+        <input type="radio" value="2" name="myRadioButton">2
+    </label>
+    <label>
+        <input type="radio" value="3" name="myRadioButton">3
+    </label>
+    <hr/>
+    <label>Чекбокс
+        <input checked="checked" type="checkbox" value="1" name="myCheckBox">1
+    </label>
+    <label>
+        <input type="checkbox" value="2" name="myCheckBoxn">2
+    </label>
+    <label>
+        <input type="checkbox" value="3" name="myCheckBox">3
+    </label>
+    <hr/>
+    <label for="myTextArea">Многострочный текст</label>
+    <p>
+        <textarea rows="5" id="myTextArea" name="myTextArea"></textarea></p>
+    <p>
+        <button type="reset">Очистить</button>
+    </p>
+    <hr/>
+    <label>Выпадающий список с единичным выбором
+        <select id="mySelect" name="mySelect">
+            <option value="1">Пункт1</option>
+            <option value="2">Пункт2</option>
+            <option value="3">Пункт3</option>
+        </select>
+    </label>
+    <hr/>
+    <label>Выпадающий список с множественным выбором
+        <select multiple="multiple" size="3" id="mySelectMultiple" name="mySelectMultiple">
+            <option value="1">Пункт1</option>
+            <option value="2">Пункт2</option>
+            <option value="3">Пункт3</option>
+        </select>
+    </label>
+    <hr/>
+    <label> Файл
+        <p>
+            <input type="file" name="myFile"/>
+        </p>
+    </label>
+    <hr/>
+    <a href="page1.html" target="_blank">На страницу 2</a>
+</form>
+</body>
+</html>
