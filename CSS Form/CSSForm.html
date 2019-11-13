@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS форма</title>
+    <link rel="stylesheet" type="text/css" href="style-form.css">
+</head>
+<body>
+<div class="common">
+    <h1>Отправить заявку</h1>
+</div>
+<div class="common form">
+    <form action="/action.php" method="post">
+        <label for="username">Ваше имя</label>
+        <input type="text" placeholder="Ваше имя *" id="username" name="username" class="field-size">
+        <label for="phone_number">Ваш номер телефона</label>
+        <input type="text" placeholder="Ваш номер телефона *" id="phone_number" name="phone_number" class="field-size">
+        <label for="contacts">Ваш e_mail или VK</label>
+        <input type="text" placeholder="Ваш e_mail или VK *" id="contacts" name="contacts" class="field-size">
+        <label for="comment">Комментарий</label>
+        <textarea placeholder="Комментарий (не обязательно)" rows="6" id="comment" name="comment"
+                  class="field-size common"></textarea>
+        <p>Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
+        <button type="submit">Отправить заявку</button>
+    </form>
+</div>
+</body>
+</html>

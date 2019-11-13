@@ -1,0 +1,49 @@
+.common {
+    font-family: Helvetica, "Arial Rounded MT Bold", sans-serif;
+    padding-left: 17px;
+    width: 45%;
+    margin: auto;
+    color: #7f7f7f;
+}
+
+.form {
+    background-color: rgba(247, 153, 64, 0.2);
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 3px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.field-size {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+p {
+    margin-top: auto;
+    font-size: 14px;
+    color: dimgrey;
+}
+
+button {
+    padding: 8px;
+    background-color: #6cb6e0;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    margin-left: 77%;
+}
