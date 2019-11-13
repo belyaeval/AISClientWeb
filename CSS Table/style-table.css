@@ -1,0 +1,22 @@
+table {
+    border-collapse: collapse;
+    font-family: Helvetica, "Arial Unicode MS", sans-serif;
+    width: 42%;
+    margin: auto;
+}
+
+td, th {
+    border: 1px solid #dbdbdb;
+    padding: 13px;
+}
+
+th {
+    text-align: left;
+    font-weight: normal;
+    background-color: #79c6f2;
+    color: #ffffff;
+}
+
+.gray-row {
+    background-color: #f0f1f2;
+}
