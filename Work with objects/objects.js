@@ -1,91 +1,55 @@
 var countries = [];
 
-var moscow = {
-    cityName: "Moscow",
-    population: 2000000
-};
-
-var novosibirsk = {
-    cityName: "Novosibirsk",
-    population: 1000000
-};
-
-var sochi = {
-    cityName: "Sochi",
-    population: 500000
-};
-
-var saratov = {
-    cityName: "Saratov",
-    population: 250000
-};
-
 countries[0] = {
     countryName: "Russia",
-    cities: [moscow, novosibirsk, sochi, saratov]
-};
-
-var paris = {
-    cityName: "Paris",
-    population: 1500000
-};
-
-var lion = {
-    cityName: "Lion",
-    population: 800000
+    cities: [
+        {cityName: "Moscow", population: 2000000},
+        {cityName: "Novosibirsk", population: 1000000},
+        {cityName: "Sochi", population: 500000},
+        {cityName: "Saratov", population: 250000}
+    ]
 };
 
 countries[1] = {
     countryName: "France",
-    cities: [paris, lion]
-};
-
-var kiev = {
-    cityName: "Kiev",
-    population: 1300000
-};
-
-var lvov = {
-    cityName: "Lvov",
-    population: 500000
-};
-
-var donetsk = {
-    cityName: "Donetsk",
-    population: 200000
+    cities: [
+        {cityName: "Paris", population: 1500000},
+        {cityName: "Lion", population: 800000}
+    ]
 };
 
 countries[2] = {
     countryName: "Ukraine",
-    cities: [kiev, lvov, donetsk]
+    cities: [
+        {cityName: "Kiev", population: 1300000},
+        {cityName: "Lvov", population: 500000},
+        {cityName: "Donetsk", population: 200000}
+    ]
 };
 
 function getMaxCitiesCountries(array) {
-    var maxCitiesCountries = [];
-    var max = 0;
-    array.forEach(function (country) {
+    var maxCitiesCount = array.reduce(function (max, country) {
         if (country.cities.length >= max) {
-            max = country.cities.length;
+           return country.cities.length;
+        } else {
+            return max;
         }
+    }, 0);
+    return array.filter(function (country) {
+        return maxCitiesCount === country.cities.length;
     });
-    array.filter(function (country) {
-        if (max === country.cities.length) {
-            maxCitiesCountries.push(country);
-        }
-    });
-    return maxCitiesCountries;
 }
 
 console.log(getMaxCitiesCountries(countries));
 
 function getCountriesPopulation(array) {
-    var countryPopulation = {};
-    array.forEach(function (country) {
-        countryPopulation[country.countryName] = country.cities.reduce(function (sumPopulation, city) {
+    var countriesPopulation = {};
+    array.map(function (country) {
+        countriesPopulation[country.countryName] = country.cities.reduce(function (sumPopulation, city) {
             return sumPopulation + city.population;
         }, 0);
     });
-    return countryPopulation;
+    return countriesPopulation;
 }
 
 console.log(getCountriesPopulation(countries));
