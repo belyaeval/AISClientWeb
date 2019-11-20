@@ -11,15 +11,12 @@ var sublistLast5 = list.slice(-5);
 console.log(sublistLast5);
 
 function getEvenSum(array) {
-    var evenList = [];
-    array.filter(function (e) {
-        if (e % 2 === 0) {
-            evenList.push(e);
-        }
+    var evenList = array.filter(function (e) {
+        return e % 2 === 0;
     });
     return evenList.reduce(function (sum, e) {
         return sum + e;
-    });
+    }, 0);
 }
 
 console.log(getEvenSum(list));
@@ -27,19 +24,16 @@ console.log(getEvenSum(list));
 var array = [];
 
 for (var i = 0; i < 100; i++) {
-    array[i] = i + 1;
+    array.push(i + 1);
 }
 
-function getEvenSquare(array) {
-    var evenArray = [];
-    array.filter(function (e) {
-        if (e % 2 === 0) {
-            evenArray.push(e);
-        }
+function getEvenSquares(array) {
+    var evenArray = array.filter(function (e) {
+        return e % 2 === 0;
     });
     return evenArray.map(function (e) {
         return Math.pow(e, 2);
     });
 }
 
-console.log(getEvenSquare(array));
+console.log(getEvenSquares(array));
