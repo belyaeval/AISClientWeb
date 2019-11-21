@@ -1,22 +1,28 @@
-table {
+.table {
+    max-width: 750px;
+    width: 100%;
     border-collapse: collapse;
     font-family: Helvetica, "Arial Unicode MS", sans-serif;
-    width: 42%;
     margin: auto;
-}
-
-td, th {
-    border: 1px solid #dbdbdb;
-    padding: 13px;
-}
-
-th {
+    font-size: 18px;
     text-align: left;
+    margin-block-start: 30px;
+    box-sizing: border-box;
+}
+
+.table td, .table th {
+    text-align: left;
+    border: 1px solid #dbdbdb;
+    padding: 12px 10px;
+    color: #454545;
+}
+
+.table th {
     font-weight: normal;
-    background-color: #79c6f2;
+    background-color: #3498db;
     color: #ffffff;
 }
 
-.gray-row {
-    background-color: #f0f1f2;
+.table tbody tr:nth-child(odd) {
+    background-color: #eee;
 }
