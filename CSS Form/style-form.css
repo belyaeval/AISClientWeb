@@ -1,28 +1,30 @@
 .common {
+    max-width: 736px;
     font-family: Helvetica, "Arial Rounded MT Bold", sans-serif;
     padding-left: 17px;
-    width: 45%;
     margin: auto;
     color: #7f7f7f;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .form {
-    background-color: rgba(247, 153, 64, 0.2);
-    padding-bottom: 15px;
+    background-color: #feeed6;
+    padding-bottom: 45px;
     padding-top: 15px;
+    font-size: 14px;
 }
 
-h1 {
+.common h1 {
     font-weight: normal;
     font-size: 28px;
     margin-bottom: 3px;
 }
 
-label {
+.common label {
     font-weight: bold;
-    font-size: 14px;
-    display: inline-block;
     margin-bottom: 5px;
+    display: inline-block;
 }
 
 .field-size {
@@ -32,18 +34,30 @@ label {
     border: none;
 }
 
-p {
+.field-size:focus {
+    outline: none;
+}
+
+.common p {
     margin-top: auto;
-    font-size: 14px;
     color: dimgrey;
 }
 
-button {
+.common textarea {
+    resize: vertical;
+}
+
+.send-button {
     padding: 8px;
-    background-color: #6cb6e0;
+    background-color: #378db2;
     color: white;
-    font-size: 14px;
     font-weight: bold;
     border: none;
-    margin-left: 77%;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+
+.send-button:hover {
+    background-color: #32728d
 }
