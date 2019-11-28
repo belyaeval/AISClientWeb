@@ -1,6 +1,4 @@
-var countries = [];
-
-countries[0] = {
+var russia = {
     countryName: "Russia",
     cities: [
         {cityName: "Moscow", population: 2000000},
@@ -10,7 +8,7 @@ countries[0] = {
     ]
 };
 
-countries[1] = {
+var france = {
     countryName: "France",
     cities: [
         {cityName: "Paris", population: 1500000},
@@ -18,7 +16,7 @@ countries[1] = {
     ]
 };
 
-countries[2] = {
+var ukraine = {
     countryName: "Ukraine",
     cities: [
         {cityName: "Kiev", population: 1300000},
@@ -27,14 +25,13 @@ countries[2] = {
     ]
 };
 
+var countries = [russia, france, ukraine];
+
 function getMaxCitiesCountries(array) {
     var maxCitiesCount = array.reduce(function (max, country) {
-        if (country.cities.length >= max) {
-           return country.cities.length;
-        } else {
-            return max;
-        }
+        return Math.max(country.cities.length, max);
     }, 0);
+
     return array.filter(function (country) {
         return maxCitiesCount === country.cities.length;
     });
@@ -44,11 +41,13 @@ console.log(getMaxCitiesCountries(countries));
 
 function getCountriesPopulation(array) {
     var countriesPopulation = {};
-    array.map(function (country) {
+
+    array.forEach(function (country) {
         countriesPopulation[country.countryName] = country.cities.reduce(function (sumPopulation, city) {
             return sumPopulation + city.population;
         }, 0);
     });
+
     return countriesPopulation;
 }
 
