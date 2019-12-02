@@ -1,0 +1,12 @@
+.validation-message {
+    color: red;
+}
+
+.common {
+    max-width: 30%;
+    font-family: "Arial Rounded MT Bold", sans-serif;
+}
+
+.common ul button {
+    margin: 3px;
+}
