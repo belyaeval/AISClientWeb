@@ -1,0 +1,19 @@
+.common {
+    width: 550px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.error-message {
+    color: red;
+}
+
+.common button {
+    position: absolute;
+    right: 0;
+}
+
+.out-text {
+    border: none;
+    background-color: white;
+}

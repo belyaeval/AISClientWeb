@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style-temperature.css">
+</head>
+<body>
+<div class="common">
+    <label for="temp-value">Введите значение тепературы в цельсиях: </label>
+    <input type="text" id="temp-value">
+
+    <button type="button" id="calc-button">Рассчитать</button>
+
+    <div style="display: none" class="error-message">Необходимо ввести число!</div>
+</div>
+<div class="common">
+    <label for="fah-temp">Значение температуры в фаренгейтах: </label>
+    <input type="text" style="display: none" disabled="disabled" id="fah-temp" class="out-text">
+</div>
+<div class="common">
+    <label for="kel-temp">Значение температуры в кельвинах: </label>
+    <input type="text" style="display: none" disabled="disabled" id="kel-temp" class="out-text">
+</div>
+<script src="temperature.js"></script>
+</body>
+</html>
