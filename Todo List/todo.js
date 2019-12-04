@@ -17,29 +17,45 @@ document.addEventListener("DOMContentLoaded", function () {
         var li = document.createElement("li");
         li.innerHTML = "<span></span><button>Редактировать</button><button>Удалить</button>";
 
-        li.children[0].textContent = newText;
+        var itemText = li.children[0];
+        var editButton = li.children[1];
+        var deleteButton = li.children[2];
 
-        li.children[1].addEventListener("click", function () {
-            li.children[0].innerHTML = "<input type='text'><button>Отменить</button><button>Сохранить</button>";
-            li.children[1].style.display = "none";
-            li.children[0].children[0].value = newText;
+        itemText.textContent = newText;
 
-            li.children[0].children[1].addEventListener("click", function () {
-                li.children[0].textContent = newText;
-                li.children[1].style.display = "inline";
+        editButton.addEventListener("click", function () {
+            itemText.innerHTML = "<input type='text'><button>Отменить</button><button>Сохранить</button>";
 
+            var editText = itemText.children[0];
+            var cancelButton = itemText.children[1];
+            var saveButton = itemText.children[2];
+
+            editButton.style.display = "none";
+            editText.value = newText;
+
+            cancelButton.addEventListener("click", function () {
+                itemText.textContent = newText;
+                editButton.style.display = "inline";
             });
 
-            li.children[0].children[2].addEventListener("click", function () {
-                li.children[0].textContent = li.children[0].children[0].value;
-                newText = li.children[0].textContent;
-                li.children[1].style.display = "inline";
+            saveButton.addEventListener("click", function () {
+                if (editText.value === "") {
+                    li.appendChild(validationMessage);
+                    validationMessage.style.display = "block";
+                    return;
+                }
+
+                validationMessage.style.display = "none";
+
+                itemText.textContent = editText.value;
+                newText = itemText.textContent;
+                editButton.style.display = "inline";
             });
         });
 
         todoList.appendChild(li);
 
-        li.children[2].addEventListener("click", function () {
+        deleteButton.addEventListener("click", function () {
             todoList.removeChild(li);
         });
 

@@ -3,8 +3,9 @@
 }
 
 .common {
-    max-width: 30%;
+    max-width: 40%;
     font-family: "Arial Rounded MT Bold", sans-serif;
+    margin-left: 10px;
 }
 
 .common ul button {
