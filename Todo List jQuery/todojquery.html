@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List jQuery</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style-todojquery.css">
+</head>
+<body>
+<div class="common">
+    <h1>TODO List</h1>
+    <div>
+        <input type="text" id="new-todo-text">
+        <button type="button" id="add-todo-button">Добавить</button>
+
+        <div style="display: none" class="validation-message">Необходимо добавить заметку!</div>
+    </div>
+    <ul id="todo-list" class="list"></ul>
+</div>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/todojquery.js"></script>
+</body>
+</html>
