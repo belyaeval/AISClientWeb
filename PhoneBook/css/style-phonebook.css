@@ -1,0 +1,35 @@
+.common, .table {
+    font-family: "Arial Unicode MS", sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.common input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.common button {
+    margin-bottom: 5px;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table td, .table th {
+    text-align: left;
+    border: 1px solid;
+    padding: 12px 10px;
+}
+
+.validation-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+.validation-help {
+    border: thin solid red;
+}
+
