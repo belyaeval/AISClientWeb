@@ -30,13 +30,17 @@ $(document).ready(function () {
             var cancelButton = li.children().eq(0).children().eq(1);
             var saveButton = li.children().eq(0).children().eq(2);
 
+            validationMessage.hide();
             editButton.hide();
             editText.val(newText);
 
             cancelButton.click(function () {
                 itemText.text(newText);
                 editButton.show();
-                validationMessage.hide();
+                if (validationMessage.show()) {
+                    validationMessage.hide();
+                    $("#input-form").append(validationMessage);
+                }
             });
 
             saveButton.click(function () {
@@ -48,6 +52,7 @@ $(document).ready(function () {
                     return;
                 }
 
+                $("#input-form").append(validationMessage);
                 validationMessage.hide();
 
                 itemText.text(editTextValue);
@@ -60,6 +65,7 @@ $(document).ready(function () {
 
         deleteButton.click(function () {
             li.remove();
+            validationMessage.hide();
         });
 
         todoText.val("");
