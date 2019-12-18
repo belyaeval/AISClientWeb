@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var todoList = document.getElementById("todo-list");
     var todoText = document.getElementById("new-todo-text");
     var validationMessage = document.querySelector(".validation-message");
+    var inputForm = document.getElementById("input-form");
 
     var todoButton = document.getElementById("add-todo-button");
     todoButton.addEventListener("click", function () {
@@ -30,12 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
             var cancelButton = itemText.children[1];
             var saveButton = itemText.children[2];
 
+            validationMessage.style.display = "none";
             editButton.style.display = "none";
             editText.value = newText;
 
             cancelButton.addEventListener("click", function () {
                 itemText.textContent = newText;
                 editButton.style.display = "inline";
+                if (validationMessage.style.display === "block") {
+                    validationMessage.style.display = "none";
+                    inputForm.appendChild(validationMessage);
+                }
             });
 
             saveButton.addEventListener("click", function () {
@@ -45,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
+                inputForm.appendChild(validationMessage);
                 validationMessage.style.display = "none";
 
                 itemText.textContent = editText.value;
@@ -56,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         todoList.appendChild(li);
 
         deleteButton.addEventListener("click", function () {
+            validationMessage.style.display = "none";
             todoList.removeChild(li);
         });
 
