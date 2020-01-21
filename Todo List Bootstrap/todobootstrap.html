@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Todo List jQuery</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style-todobootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="display-4">TODO List</h1>
+
+    <div class="input-group mb-3">
+        <input type="text" id="new-todo-text">
+
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary" id="add-todo-button">Добавить</button>
+        </div>
+    </div>
+
+    <div style="display: none" class="validation-message" id="validation">Необходимо добавить заметку!</div>
+
+    <ul id="todo-list" class="list"></ul>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="todobootstrap.js"></script>
+
+</body>
+</html>

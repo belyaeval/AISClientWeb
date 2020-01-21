@@ -1,0 +1,12 @@
+.validation-message {
+    color: red;
+}
+
+.container {
+    margin-left: 10px;
+}
+
+.buttons {
+    padding-top: 2px;
+    padding-bottom: 10px;
+}
