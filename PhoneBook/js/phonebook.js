@@ -10,36 +10,34 @@ $(document).ready(function () {
 
     addButton.click(function () {
         if (surname.val() === "" || name.val() === "" || phoneNumber.val() === "") {
-            $(inputData).addClass("validation-help");
-            $(validationMessage).text("Не заполнены обязательные поля");
+            inputData.addClass("validation-help");
+            validationMessage.text("Не заполнены обязательные поля");
             validationMessage.show();
 
             if (surname.val() !== "") {
-                $(surname).removeClass("validation-help");
+                surname.removeClass("validation-help");
             }
 
             if (name.val() !== "") {
-                $(name).removeClass("validation-help");
+                name.removeClass("validation-help");
             }
 
             if (phoneNumber.val() !== "") {
-                $(phoneNumber).removeClass("validation-help");
+                phoneNumber.removeClass("validation-help");
             }
 
             return;
         }
 
         if (isNaN(phoneNumber.val())) {
-            $(phoneNumber).addClass("validation-help");
-            $(validationMessage).text("Неверно заполен номер телефона");
+            phoneNumber.addClass("validation-help");
+            validationMessage.text("Неверно заполен номер телефона");
             validationMessage.show();
             return;
         }
 
         validationMessage.hide();
-        $(surname).removeClass("validation-help");
-        $(name).removeClass("validation-help");
-        $(phoneNumber).removeClass("validation-help");
+        inputData.removeClass("validation-help");
 
         i++;
 
@@ -65,7 +63,7 @@ $(document).ready(function () {
                 })
             );
 
-        $(inputData).val("");
+        inputData.val("");
         table.append(newRow);
     });
 });
