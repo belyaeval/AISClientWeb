@@ -15,7 +15,7 @@ $(document).ready(function () {
         validationMessage.hide();
 
         var item = $("<li>")
-            .append($("<span></span>"));
+            .append($("<span class='text-break'></span>"));
 
         var buttons = $("<div></div>")
             .append($("<div class='btn-group btn-group-sm buttons'></div>")
@@ -32,7 +32,7 @@ $(document).ready(function () {
         itemText.text(newText);
 
         editButton.click(function () {
-            itemText.html("<input type='text'>");
+            itemText.html("<input type='text' class=\"form-control\">");
 
             var saveEditButtons = buttons.children().eq(0);
 

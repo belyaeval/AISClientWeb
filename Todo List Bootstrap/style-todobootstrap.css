@@ -1,9 +1,6 @@
 .validation-message {
     color: red;
-}
-
-.container {
-    margin-left: 10px;
+    padding-bottom: 10px;
 }
 
 .buttons {
