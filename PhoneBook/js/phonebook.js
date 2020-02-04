@@ -5,7 +5,7 @@ $(document).ready(function () {
     var phoneNumber = $("#phone-number");
     var addButton = $("#add-button");
     var validationMessage = $(".validation-message");
-    var inputData = $("input");
+    var inputData = $(".common input");
     var i = 0;
 
     addButton.click(function () {
