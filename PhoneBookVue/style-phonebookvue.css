@@ -1,0 +1,12 @@
+.container button {
+    margin-bottom: 25px;
+}
+
+.validation-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+.invalid {
+    border: thin solid red;
+}

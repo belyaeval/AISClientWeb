@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhoneBookVue</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style-phonebookvue.css">
+</head>
+<body>
+<div id="phonebook" class="container">
+    <form>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="surname">Фамилия</label>
+                <input type="text" class="form-control" :class="{invalid: isInvalidSurname}" id="surname"
+                       v-model="newSurname">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" id="name" :class="{invalid: isInvalidName}" v-model="newName">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="phoneNumber">Номер телефона</label>
+                <input type="text" class="form-control" id="phoneNumber" :class="{invalid: isInvalidPhoneNumber}"
+                       v-model="newPhoneNumber">
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" @click="addItem">Добавить</button>
+
+
+        <div v-if="isInvalidData" class="validation-message">Не заполнены обязательные поля</div>
+        <div v-if="isNotNumber" class="validation-message">Неверно заполен номер телефона</div>
+        <div v-if="isExist" class="validation-message">Запись с данным номером телефона уже существует</div>
+    </form>
+
+    <div class="input-group input-group-sm col-md-6">
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-sm" v-model="searchText" placeholder="Поиск">
+        <div class="input-group-append">
+            <button type="button" class="btn btn-secondary btn-sm" @click="clearFilter">Сбросить</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th scope="col">
+                <input type="checkbox" v-model="titleChecked" @click="checkAll">
+            </th>
+            <th scope="col">№</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, index) in filteredItems" :key="item.itemNumber">
+            <td>
+                <input type="checkbox" v-model="checkedItems" :value="item" @change="updateCheckAll">
+            </td>
+            <td v-text="index + 1"></td>
+            <td v-text="item.surname"></td>
+            <td v-text="item.name"></td>
+            <td v-text="item.phoneNumber"></td>
+            <td>
+                <button type='button' class="btn btn-danger btn-sm" data-toggle="modal"
+                        data-target="#itemModal">Удалить
+                </button>
+
+                <div class="modal fade" id="itemModal" tabindex="-1" role="dialog"
+                     aria-labelledby="itemModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="itemModalTitle">Удалить запись</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                Вы действительно хотите удалить запись?
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        @click="deleteItem(item)">Да
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" :disabled="!isChecked" class="btn btn-danger btn-sm" data-toggle="modal"
+                data-target="#itemsModal">Удалить выбранные записи
+        </button>
+
+        <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog"
+             aria-labelledby="itemsModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="itemsModalTitle">Удалить выбранные записи</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Вы действительно хотите удалить выбранные записи?
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                @click="deleteCheckedItems">Да
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="phonebookvue.js"></script>
+</body>
+</html>
