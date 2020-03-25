@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Todo List Vue</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style-todovue.css">
+</head>
+<body>
+<div id="app" class="container" v-cloak>
+    <h1 class="display-4">TODO List Vue</h1>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" :class="{invalid: isInvalid}" v-model="newTodoText">
+
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary" @click="addTodo">Добавить</button>
+        </div>
+    </div>
+
+    <div v-if="isInvalid" class="validation-message">Необходимо добавить заметку!</div>
+
+    <ul id="todo-list">
+        <li v-for="item in items">
+            <div v-if="!item.isEdit">
+                <span class='text-break' v-text="item.text"></span>
+                <div class='btn-group btn-group-sm buttons'>
+                    <button class='btn btn-outline-secondary' @click="editTodo(item)">Редактировать</button>
+                    <button class='btn btn-outline-secondary' @click="deleteTodo(item)">Удалить</button>
+                </div>
+            </div>
+
+            <div v-else>
+                <input type='text' class="form-control" :class="{invalid: item.isInvalid}" v-model="item.editTodoText">
+                <div class='btn-group btn-group-sm buttons'>
+                    <button class='btn btn-outline-secondary' @click="saveTodo(item)">Сохранить</button>
+                    <button class='btn btn-outline-secondary' @click="cancelTodo(item)">Отменить</button>
+                    <button class='btn btn-outline-secondary' @click="deleteTodo(item)">Удалить</button>
+                </div>
+
+                <div v-if="item.isInvalid" class="validation-message">Необходимо добавить заметку!</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/popper.js/dist/popper.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="todovue.js"></script>
+
+</body>
+</html>

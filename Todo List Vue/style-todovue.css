@@ -1,0 +1,13 @@
+.validation-message {
+    color: red;
+    padding-bottom: 10px;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.buttons {
+    padding-top: 2px;
+    padding-bottom: 10px;
+}
