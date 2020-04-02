@@ -1,0 +1,137 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    {% verbatim %}
+<div id="app" v-cloak class="container">
+  <h1 class="my-3">Phone Book Server</h1>
+    <form class="was-validated">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Фамилия</label>
+                <input type="text" class="form-control" v-model="newSurname" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Имя</label>
+                <input type="text" class="form-control" v-model="newName" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Номер телефона</label>
+                <input type="number" class="form-control" v-model="newPhoneNumber" required>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary mb-4" @click="addContact">Добавить</button>
+
+        <div v-if="isInvalidData" class="text-danger mb-4">Не заполнены обязательные поля</div>
+        <div v-if="isExist" class="text-danger mb-4">Запись с данным номером телефона уже существует</div>
+    </form>
+
+    <div class="row">
+        <div class="input-group input-group-sm col-md-6 mb-3">
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm" v-model="term" placeholder="Поиск">
+
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary btn-sm" @click="getContacts">Найти</button>
+                <button type="button" class="btn btn-secondary btn-sm" @click="clearFilter">Сбросить</button>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" v-model="titleChecked" @click="checkAll">
+            </th>
+            <th>№</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Номер телефона</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(c, index) in contacts" :key="c.id">
+            <td>
+                <input type="checkbox" v-model="checkedContacts" :value="c" @change="updateCheckAll">
+            </td>
+            <td>{{index + 1}}.</td>
+            <td v-text="c.surname"></td>
+            <td v-text="c.name"></td>
+            <td v-text="c.phoneNumber"></td>
+            <td>
+                <button type='button' class="btn btn-danger btn-sm" data-toggle="modal"
+                        data-target="#contactModal">Удалить
+                </button>
+
+                <div class="modal fade" id="contactModal" tabindex="-1" role="dialog"
+                     aria-labelledby="contactModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="contactModalTitle">Удалить запись</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                Вы действительно хотите удалить запись?
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                        @click="deleteContact(c)">Да
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <button type="button" :disabled="!isChecked" class="btn btn-danger btn-sm" data-toggle="modal"
+                data-target="#contactsModal">Удалить выбранные записи
+        </button>
+
+        <div class="modal fade" id="contactsModal" tabindex="-1" role="dialog"
+             aria-labelledby="contactsModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contactsModalTitle">Удалить выбранные записи</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Вы действительно хотите удалить выбранные записи?
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                @click="deleteCheckedContacts">Да
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endverbatim %}
+{% endblock %}
