@@ -5,10 +5,6 @@ new Vue({
         newSurname: "",
         newName: "",
         newPhoneNumber: "",
-        isInvalidSurname: false,
-        isInvalidName: false,
-        isInvalidPhoneNumber: false,
-        isNotNumber: false,
         isInvalidData: false,
         searchText: "",
         checkedItems: [],
@@ -31,57 +27,30 @@ new Vue({
         addItem: function () {
             if (this.newSurname === "" || this.newName === "" || this.newPhoneNumber === "") {
                 this.isInvalidData = true;
-                this.isInvalidSurname = true;
-                this.isInvalidName = true;
-                this.isInvalidPhoneNumber = true;
-
-                if (this.newSurname !== "") {
-                    this.isInvalidSurname = false;
-                }
-
-                if (this.newName !== "") {
-                    this.isInvalidName = false;
-                }
-
-                if (this.newPhoneNumber !== "") {
-                    this.isInvalidPhoneNumber = false;
-                }
 
                 return;
             }
-
-            this.isInvalidSurname = false;
-            this.isInvalidName = false;
-            this.isInvalidData = false;
-
-            if (isNaN(this.newPhoneNumber)) {
-                this.isInvalidPhoneNumber = true;
-                this.isNotNumber = true;
-                return;
-            }
-
-            this.isNotNumber = false;
-            this.isInvalidPhoneNumber = false;
 
             this.isExist = this.items.some(function (item) {
                 return item.phoneNumber === this.newPhoneNumber;
             }, this);
 
-            if (!this.isExist) {
-                this.items.push({
-                    itemNumber: this.newItemNumber++,
-                    surname: this.newSurname,
-                    name: this.newName,
-                    phoneNumber: this.newPhoneNumber
-                });
-            } else {
+            if (this.isExist) {
                 return;
             }
+
+            this.isExist = false;
+
+            this.items.push({
+                itemNumber: this.newItemNumber++,
+                surname: this.newSurname,
+                name: this.newName,
+                phoneNumber: this.newPhoneNumber
+            });
 
             this.newSurname = "";
             this.newName = "";
             this.newPhoneNumber = "";
-            this.isExist = false;
         },
 
         deleteItem: function (item) {

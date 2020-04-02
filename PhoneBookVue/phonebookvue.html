@@ -7,44 +7,44 @@
     <link rel="stylesheet" type="text/css" href="style-phonebookvue.css">
 </head>
 <body>
-<div id="phonebook" class="container">
-    <form>
+<div id="phonebook" class="container" v-cloak>
+    <h1 class="my-3">Phone Book Vue</h1>
+    <form class="was-validated">
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="surname">Фамилия</label>
-                <input type="text" class="form-control" :class="{invalid: isInvalidSurname}" id="surname"
-                       v-model="newSurname">
+                <label>Фамилия</label>
+                <input type="text" class="form-control" v-model="newSurname" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="name">Имя</label>
-                <input type="text" class="form-control" id="name" :class="{invalid: isInvalidName}" v-model="newName">
+                <label>Имя</label>
+                <input type="text" class="form-control" v-model="newName" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="phoneNumber">Номер телефона</label>
-                <input type="text" class="form-control" id="phoneNumber" :class="{invalid: isInvalidPhoneNumber}"
-                       v-model="newPhoneNumber">
+                <label>Номер телефона</label>
+                <input type="number" class="form-control" v-model="newPhoneNumber" required>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" @click="addItem">Добавить</button>
+        <button type="button" class="btn btn-primary mb-4" @click="addItem">Добавить</button>
 
 
-        <div v-if="isInvalidData" class="validation-message">Не заполнены обязательные поля</div>
-        <div v-if="isNotNumber" class="validation-message">Неверно заполен номер телефона</div>
-        <div v-if="isExist" class="validation-message">Запись с данным номером телефона уже существует</div>
+        <div v-if="isInvalidData" class="text-danger mb-4">Не заполнены обязательные поля</div>
+        <div v-if="isExist" class="text-danger mb-4">Запись с данным номером телефона уже существует</div>
     </form>
 
-    <div class="input-group input-group-sm col-md-6">
-        <input type="text" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-sm" v-model="searchText" placeholder="Поиск">
-        <div class="input-group-append">
-            <button type="button" class="btn btn-secondary btn-sm" @click="clearFilter">Сбросить</button>
+    <div class="row">
+        <div class="input-group input-group-sm col-md-6 mb-3">
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-sm" v-model="searchText" placeholder="Поиск">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary btn-sm" @click="clearFilter">Сбросить</button>
+            </div>
         </div>
     </div>
 
