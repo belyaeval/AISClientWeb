@@ -19,10 +19,10 @@
         </div>
     </div>
 
-    <div v-if="isInvalid" class="validation-message">Необходимо добавить заметку!</div>
+    <div v-if="isInvalid" class="text-danger mb-4">Необходимо добавить заметку!</div>
 
     <ul id="todo-list">
-        <li v-for="item in items">
+        <li v-for="item in items" :key="item.id">
             <div v-if="!item.isEdit">
                 <span class='text-break' v-text="item.text"></span>
                 <div class='btn-group btn-group-sm buttons'>
@@ -32,14 +32,14 @@
             </div>
 
             <div v-else>
-                <input type='text' class="form-control" :class="{invalid: item.isInvalid}" v-model="item.editTodoText">
+                <input type='text' class="form-control" :class="{invalid: item.isInvalid}" v-model="editTodoText">
                 <div class='btn-group btn-group-sm buttons'>
                     <button class='btn btn-outline-secondary' @click="saveTodo(item)">Сохранить</button>
                     <button class='btn btn-outline-secondary' @click="cancelTodo(item)">Отменить</button>
                     <button class='btn btn-outline-secondary' @click="deleteTodo(item)">Удалить</button>
                 </div>
 
-                <div v-if="item.isInvalid" class="validation-message">Необходимо добавить заметку!</div>
+                <div v-if="item.isInvalid" class="text-danger mb-4">Необходимо добавить заметку!</div>
             </div>
         </li>
     </ul>

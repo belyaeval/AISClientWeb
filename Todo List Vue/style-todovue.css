@@ -1,6 +1,5 @@
-.validation-message {
-    color: red;
-    padding-bottom: 10px;
+[v-cloak] {
+    display: none;
 }
 
 .invalid {

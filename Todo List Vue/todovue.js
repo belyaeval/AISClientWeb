@@ -5,7 +5,8 @@ new Vue({
         newTodoText: "",
         isInvalid: false,
         editTodoText: "",
-        isEdit: false
+        isEdit: false,
+        itemId: 1
     },
     methods: {
         addTodo: function () {
@@ -18,39 +19,41 @@ new Vue({
 
             this.items.push({
                 text: this.newTodoText,
-                isEdit: false
+                isEdit: false,
+                id: this.itemId
             });
 
             this.newTodoText = "";
+            this.itemId++;
         },
 
         editTodo: function (item) {
             item.isEdit = true;
-            item.editTodoText = item.text;
+            this.editTodoText = item.text;
         },
 
         saveTodo: function (item) {
             item.isEdit = false;
 
-            if (item.editTodoText === "") {
+            if (this.editTodoText === "") {
                 item.isInvalid = true;
                 item.isEdit = true;
                 return;
             }
 
             item.isInvalid = false;
-            item.text = item.editTodoText;
+            item.text = this.editTodoText;
         },
 
         cancelTodo: function (item) {
             item.isEdit = false;
             item.isInvalid = false;
-    },
+        },
 
-    deleteTodo: function (item) {
-        this.items = this.items.filter(function (x) {
-            return x !== item;
-        });
+        deleteTodo: function (item) {
+            this.items = this.items.filter(function (x) {
+                return x !== item;
+            });
+        }
     }
-}
 });
