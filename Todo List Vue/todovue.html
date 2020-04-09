@@ -32,7 +32,7 @@
             </div>
 
             <div v-else>
-                <input type='text' class="form-control" :class="{invalid: item.isInvalid}" v-model="editTodoText">
+                <input type='text' class="form-control" :class="{invalid: item.isInvalid}" v-model="item.text">
                 <div class='btn-group btn-group-sm buttons'>
                     <button class='btn btn-outline-secondary' @click="saveTodo(item)">Сохранить</button>
                     <button class='btn btn-outline-secondary' @click="cancelTodo(item)">Отменить</button>
