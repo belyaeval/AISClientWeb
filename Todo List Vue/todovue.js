@@ -18,17 +18,17 @@ new Vue({
 
             this.items.push({
                 text: this.newTodoText,
+                editText: this.newTodoText,
                 isEdit: false,
-                id: this.itemId
+                id: this.itemId++
             });
 
             this.newTodoText = "";
-            this.itemId++;
         },
 
         editTodo: function (item) {
             item.isEdit = true;
-            item.newTodoText = item.text;
+            item.editText = item.text;
         },
 
         saveTodo: function (item) {
@@ -41,13 +41,12 @@ new Vue({
             }
 
             item.isInvalid = false;
-            item.newTodoText = item.text;
         },
 
         cancelTodo: function (item) {
             item.isEdit = false;
             item.isInvalid = false;
-            item.text = item.newTodoText;
+            item.text = item.editText;
         },
 
         deleteTodo: function (item) {
