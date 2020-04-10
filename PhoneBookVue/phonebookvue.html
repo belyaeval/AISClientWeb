@@ -9,25 +9,28 @@
 <body>
 <div id="phonebook" class="container" v-cloak>
     <h1 class="my-3">Phone Book Vue</h1>
-    <form class="was-validated">
+    <form>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Фамилия</label>
-                <input type="text" class="form-control" v-model="newSurname" required>
+                <input type="text" class="form-control" :class="{'is-invalid': isInvalidSurname}" v-model="newSurname"
+                       required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Имя</label>
-                <input type="text" class="form-control" v-model="newName" required>
+                <input type="text" class="form-control" :class="{'is-invalid': isInvalidName}" v-model="newName"
+                       required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Номер телефона</label>
-                <input type="number" class="form-control" v-model="newPhoneNumber" required>
+                <input type="text" class="form-control" :class="{'is-invalid': isInvalidPhoneNumber}"
+                       v-model="newPhoneNumber" required>
             </div>
         </div>
 
@@ -35,6 +38,7 @@
 
 
         <div v-if="isInvalidData" class="text-danger mb-4">Не заполнены обязательные поля</div>
+        <div v-if="isNotNumber" class="text-danger mb-4">Неверно заполен номер телефона</div>
         <div v-if="isExist" class="text-danger mb-4">Запись с данным номером телефона уже существует</div>
     </form>
 
@@ -52,7 +56,7 @@
         <thead>
         <tr>
             <th scope="col">
-                <input type="checkbox" v-model="titleChecked" @click="checkAll">
+                <input type="checkbox" :disabled="isEmpty" v-model="titleChecked" @click="checkAll">
             </th>
             <th scope="col">№</th>
             <th scope="col">Фамилия</th>
@@ -72,15 +76,15 @@
             <td v-text="item.phoneNumber"></td>
             <td>
                 <button type='button' class="btn btn-danger btn-sm" data-toggle="modal"
-                        data-target="#itemModal">Удалить
+                        :data-target="'#itemModal' + item.itemNumber">Удалить
                 </button>
 
-                <div class="modal fade" id="itemModal" tabindex="-1" role="dialog"
-                     aria-labelledby="itemModalTitle" aria-hidden="true">
+                <div class="modal fade" :id="'itemModal' + item.itemNumber" tabindex="-1" role="dialog"
+                     :aria-labelledby="'itemModalLabel' + item.itemNumber" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="itemModalTitle">Удалить запись</h5>
+                                <h5 class="modal-title" :id="'itemModalLabel' + item.itemNumber">Удалить запись</h5>
 
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -104,9 +108,10 @@
         </tr>
         </tbody>
     </table>
+
     <div>
         <button type="button" :disabled="!isChecked" class="btn btn-danger btn-sm" data-toggle="modal"
-                data-target="#itemsModal">Удалить выбранные записи
+                data-target="#itemsModal">Удалить выбранные
         </button>
 
         <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog"
