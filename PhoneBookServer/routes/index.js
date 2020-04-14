@@ -43,14 +43,19 @@ router.post("/deleteContact", function (req, res) {
 router.post("/addContact", function (req, res) {
     var contact = req.body.request;
 
+    var isInvalidSurname = contact.surname === "";
+    var isInvalidName = contact.name === "";
+    var isInvalidPhoneNumber = contact.phoneNumber === "";
+    var isNotNumber = isNaN(contact.phoneNumber);
+
     var hasContactWithPhone = contacts.some(function (c) {
         return c.phoneNumber.toUpperCase() === contact.phoneNumber.toUpperCase();
     });
 
-    if (hasContactWithPhone) {
+    if (isInvalidSurname || isInvalidName || isInvalidPhoneNumber || isNotNumber || hasContactWithPhone) {
         res.send({
             success: false,
-            message: null
+            message: "Контакты не добавлены"
         });
 
         return;
@@ -68,14 +73,20 @@ router.post("/addContact", function (req, res) {
 
 router.post("/deleteCheckedContacts", function (req, res) {
     var checkedContacts = req.body.data;
+    var remainingContacts = contacts.length - checkedContacts.length;
 
-    if (contacts.length === checkedContacts.length) {
-        contacts = [];
-    } else {
-        contacts = contacts.filter(function (contact) {
-            return checkedContacts.every(function (checkedContact) {
-                return contact.id !== checkedContact.id;
-            });
+    contacts = contacts.filter(function (contact) {
+        return checkedContacts.every(function (checkedContact) {
+            return contact.id !== checkedContact.id;
+        });
+    });
+
+    var isDeleted = remainingContacts === contacts.length;
+
+    if (!isDeleted) {
+        res.send({
+            success: false,
+            message: "Выбранные контакты не удалены"
         });
     }
 
