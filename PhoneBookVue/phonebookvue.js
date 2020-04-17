@@ -36,6 +36,9 @@ new Vue({
                 this.isEmpty = true;
                 this.titleChecked = false;
             } else {
+                if (this.checkedItems.length === 0) {
+                    this.isChecked = false;
+                }
                 this.isEmpty = false;
             }
 
@@ -73,23 +76,25 @@ new Vue({
             if (isNaN(this.newPhoneNumber)) {
                 this.isInvalidPhoneNumber = true;
                 this.isNotNumber = true;
+                this.isExist = false;
                 return;
             }
 
             this.isNotNumber = false;
-            this.isInvalidPhoneNumber = false;
-
 
             this.isExist = this.items.some(function (item) {
                 return item.phoneNumber === this.newPhoneNumber;
             }, this);
 
             if (this.isExist) {
+                this.isInvalidPhoneNumber = true;
                 return;
             }
 
+            this.isInvalidPhoneNumber = false;
+
             this.items.push({
-                itemNumber: this.newItemNumber++,
+                itemNumber: this.newItemNumber,
                 surname: this.newSurname,
                 name: this.newName,
                 phoneNumber: this.newPhoneNumber
@@ -98,6 +103,7 @@ new Vue({
             this.newSurname = "";
             this.newName = "";
             this.newPhoneNumber = "";
+            this.newItemNumber += 1;
         },
 
         deleteItem: function (item) {
@@ -136,16 +142,11 @@ new Vue({
 
         updateCheckAll: function () {
             this.isChecked = this.checkedItems.length !== 0;
-
-            if (this.items.length !== this.checkedItems.length) {
-                return this.titleChecked = false;
-            }
-
-            return this.titleChecked = true;
+            this.titleChecked = this.items.length === this.checkedItems.length;
         },
 
         clearFilter: function () {
-            return this.searchText = "";
+            this.searchText = "";
         }
     }
 });
