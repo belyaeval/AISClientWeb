@@ -68,10 +68,13 @@ new Vue({
                     self.isEmpty = true;
                     self.titleChecked = false;
                 } else {
+                    if (self.checkedContacts.length === 0) {
+                        self.isChecked = false;
+                    }
                     self.isEmpty = false;
                 }
             }).fail(function () {
-                alert("Ошибка! Контакты не загружены")
+                alert("Ошибка! Контакты не загружены");
             });
         },
 
@@ -106,34 +109,36 @@ new Vue({
             if (isNaN(self.newPhoneNumber)) {
                 self.isInvalidPhoneNumber = true;
                 self.isNotNumber = true;
+                self.isExist = false;
                 return;
             }
 
             self.isNotNumber = false;
-
-            self.isExist = self.contacts.some(function (contact) {
-                return contact.phoneNumber === self.newPhoneNumber;
-            }, this);
-
-            self.isInvalidPhoneNumber = false;
 
             this.service.addContact({
                 surname: this.newSurname,
                 name: this.newName,
                 phoneNumber: this.newPhoneNumber
             }).done(function (response) {
+                if (response.hasContact) {
+                    self.isExist = true;
+                    self.isInvalidPhoneNumber = true;
+                    return;
+                }
                 if (!response.success) {
                     alert(response.message);
                     return;
                 }
 
+                self.isInvalidPhoneNumber = false;
+                self.isExist = false;
                 self.newSurname = "";
                 self.newName = "";
                 self.newPhoneNumber = "";
 
                 self.getContacts();
             }).fail(function () {
-                alert("Ошибка! Контакты не добавлены")
+                alert("Ошибка! Контакты не добавлены");
             });
         },
 
@@ -148,7 +153,7 @@ new Vue({
 
                 self.getContacts();
             }).fail(function () {
-                alert("Ошибка! Контакт не удален")
+                alert("Ошибка! Контакт не удален");
             });
         },
 
@@ -161,9 +166,9 @@ new Vue({
                     return;
                 }
 
-                self.getContacts()
+                self.getContacts();
             }).fail(function () {
-                alert("Ошибка! Контакты не удалены")
+                alert("Ошибка! Контакты не удалены");
             });
 
             self.checkedContacts = [];
@@ -189,20 +194,14 @@ new Vue({
             var self = this;
 
             self.isChecked = self.checkedContacts.length !== 0;
-
-            if (self.contacts.length !== self.checkedContacts.length) {
-                return self.titleChecked = false;
-            }
-
-            return self.titleChecked = true;
+            self.titleChecked = self.contacts.length === self.checkedContacts.length;
         },
 
         clearFilter: function () {
             var self = this;
 
             self.term = "";
-
-            return self.getContacts();
+            self.getContacts();
         }
     }
 });

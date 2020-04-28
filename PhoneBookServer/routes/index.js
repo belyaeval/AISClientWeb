@@ -48,14 +48,49 @@ router.post("/addContact", function (req, res) {
     var isInvalidPhoneNumber = contact.phoneNumber === "";
     var isNotNumber = isNaN(contact.phoneNumber);
 
+    if (isInvalidSurname) {
+        res.send({
+            success: false,
+            message: "Не заполнено поле \"Фамилия\""
+        });
+
+        return;
+    }
+
+    if (isInvalidName) {
+        res.send({
+            success: false,
+            message: "Не заполнено поле \"Имя\""
+        });
+
+        return;
+    }
+
+    if (isInvalidPhoneNumber) {
+        res.send({
+            success: false,
+            message: "Не заполнено поле \"Номер телефона\""
+        });
+
+        return;
+    }
+
+    if (isNotNumber) {
+        res.send({
+            success: false,
+            message: "Поле \"Номер телефона\" должно быть числовым"
+        });
+
+        return;
+    }
+
     var hasContactWithPhone = contacts.some(function (c) {
         return c.phoneNumber.toUpperCase() === contact.phoneNumber.toUpperCase();
     });
 
-    if (isInvalidSurname || isInvalidName || isInvalidPhoneNumber || isNotNumber || hasContactWithPhone) {
+    if (hasContactWithPhone) {
         res.send({
-            success: false,
-            message: "Контакты не добавлены"
+            hasContact: true
         });
 
         return;
@@ -66,6 +101,7 @@ router.post("/addContact", function (req, res) {
     contacts.push(contact);
 
     res.send({
+        hasContact: false,
         success: true,
         message: null
     });
